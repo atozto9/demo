@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        a:link {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        #player {
+            width: 250px;
+        }
+
+        ​
+    </style>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>FACTSpeech Demo</title>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+            crossorigin="anonymous"></script>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- Fonts CSS-->
+    <link rel="stylesheet" href="css/heading.css">
+    <link rel="stylesheet" href="css/body.css">
+    <!-- Bootstrap slider CSS -->
+    <!-- <link rel="stylesheet" href="css/bootstrap-slider.css"> -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css"
+          integrity="sha512-3q8fi8M0VS+X/3n64Ndpp6Bit7oXSiyCnzmlx6IDBLGlY5euFySyJ46RUlqIVs0DPCGOypqP8IRk/EyPvU28mQ=="
+          crossorigin="anonymous"/>
+    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body id="page-top">
+<nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
+    <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Audio demos</a>
+        <button class="navbar-toggler navbar-toggler-right font-weight-bold bg-primary text-white rounded" type="button"
+                data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1" style="background-color: #117a8b"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                     href="#abstract">ABSTRACT</a>
+                <li class="nav-item mx-0 mx-lg-1" style="background-color: #117a8b"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                     href="#con_tran_words">Controlling the pronunciation of transliterated words</a></li>
+                <li class="nav-item mx-0 mx-lg-1" style="background-color: #117a8b"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                     href="#tran_text_to_speech">Transliterated text to speech</a></li>
+                <li class="nav-item mx-0 mx-lg-1" style="background-color: #117a8b"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                                                       href="#interpolation">Language style interpolation</a></li>
+                <li class="nav-item mx-0 mx-lg-1" style="background-color: #117a8b"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                                                       href="#additional_audio">Additional audio</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="masthead bg-white text-left"> <!-- text-black 사용 가능 -->
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Heading-->
+        <h1 align="center" class="masthead-heading mb-0">Factspeech: Speaking a Foreign Language Pronunciation Using Only Your Native Characters</h1>
+        <!-- Masthead Subheading-->
+        <p class="pre-wrap lead">&nbsp;</p>
+        <p class="pre-wrap masthead-subheading font-weight-light mb-0 font-italic">Hong-Sun Yang, Ji-Hoon Kim, Yoon-Cheol Ju, Il-Hwan Kim, Byeong-Yeol Kim, Shuk-Jae Choi, Hyung-Yong Kim</p>
+    </div>
+</header>
+
+<!-- Abstraction -->
+<section class="page-section portfolio" id="abstract">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading text-secondary mb-0 d-inline-block">ABSTRACT</h2>
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+            <div class="col-lg-12 ml-auto">
+                <p class="pre-wrap lead">Recent text-to-speech models have been requested to synthesize natural speech from language-mixed sentences because they are commonly used in real-world applications. However, most models do not consider transliterated words as input. When generating speech from transliterated text, it is not always natural to pronounce transliterated words as they are written, such as in the case of song titles. To address this issue, we introduce FACTSpeech, a system that can synthesize natural speech from transliterated text while allowing users to control the pronunciation between native and literal languages. Specifically, we propose a new language shift embedding to control the pronunciation of input text between native or literal pronunciation. Moreover, we leverage conditional instance normalization to improve pronunciation while preserving the speaker identity. The experimental results show that FACTSpeech generates native speech even from the sentences of transliterated form.</p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Controlling the pronunciation of transliterated words -->
+<section class="page-section bg-primary text-white mb-0" id="con_tran_words">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="page-section-heading d-inline-block">Controlling the pronunciation of transliterated words</h2>
+        </div>
+
+        <div class="divider-custom divider-light">
+            <div class="divider-custom"></div>
+        </div>
+        <div class="row justify-content-center">
+
+            <!-- About Section Content-->
+            <div class="row">
+                <div class="col-lg-12 ml-auto">
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                <span style="color: white; font-weight: bold; background-color: blue">WORD</span>:
+                                eng2kor LSE
+                                </br>
+                                <span style="color: white; font-weight: bold; background-color: red">WORD</span>:
+                                kor2eng LSE
+                                </br>
+                                <span>WORD</span>: zero LSE
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+                        <tr>
+                            <td style="vertical-align: middle;">The next song is pi ttam nunmul by bangtan sonyeondan.
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/controll_tw/bangtan/a.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                The next song is <span style="color: white; font-weight: bold; background-color: blue"> pi ttam nunmul</span>
+                                by bangtan sonyeondan.
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/controll_tw/bangtan/b.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                The next song is pi ttam nunmul by <span
+                                    style="color: white; font-weight: bold; background-color: blue">bangtan sonyeondan</span>.
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/controll_tw/bangtan/c.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                The next song is <span style="color: white; font-weight: bold; background-color: blue"> pi ttam nunmul</span>
+                                by <span style="color: white; font-weight: bold; background-color: blue">bangtan sonyeondan</span>.
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/controll_tw/bangtan/d.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+                        <tr>
+                            <td style="vertical-align: middle;">오늘의 추천곡은 테일러 스위프트의 배드 블러드
+                                입니다.
+                                </br>
+                                <span style="color: slategray; opacity:0.5">oneurui chucheongogeun "Taylor Swift"-ui "Bad Blood"-ipnida.</span>
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/controll_tw/tayler/a.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                오늘의 추천곡은 <span
+                                    style="color: white; font-weight: bold; background-color: red">테일러 스위프트</span>의
+                                배드 블러드 입니다.
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/controll_tw/tayler/b.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                오늘의 추천곡은 테일러 스위프트의 <span
+                                    style="color: white; font-weight: bold; background-color: red">배드 블러드</span>
+                                입니다.
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/controll_tw/tayler/c.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                오늘의 추천곡은 <span
+                                    style="color: white; font-weight: bold; background-color: red">테일러 스위프트</span>의
+                                <span style="color: white; font-weight: bold; background-color: red">배드 블러드</span>
+                                입니다.
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/controll_tw/tayler/d.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+</section>
+
+
+<section class="page-section bg-info text-white mb-0" id="tran_text_to_speech">
+    <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading d-inline-block text-white">Transliterated text to speech</h2>
+            <!--                                         <p class="pre-wrap lead">&nbsp;</p> -->
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom"></div>
+        </div>
+        <div class="row justify-content-center">
+
+            <!-- About Section Content-->
+            <div class="row">
+                <div class="col-lg-12 ml-auto">
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                <span style="font-weight: bold;">4 types of input</span>
+                                </br>
+                                EN:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; English
+                                </br>
+                                T-EN:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A transliterated text from English to Korean
+                                </br>
+                                KO:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Korean
+                                </br>
+                                T-KO:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A transliterated text from Korean to English
+                            </td>
+
+                        </tr>
+
+                    </table>
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+
+                        <tr>
+                            <td style="vertical-align: middle; text-align:center;">
+                                Ground Truth
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/type/gt_en.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle;">(EN) Each crew was to compete against their rival from
+                                the other town.
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/type/en.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                (T-EN) <span style="color: white; font-weight: bold; background-color: red">이취 크루 와즈 투 컴피트 어게인스트 데어 라이벌 프롬 더 아더 타운.</span>
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/type/t-en.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+
+                        <tr>
+                            <td style="vertical-align: middle; text-align:center;">
+                                Ground Truth
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/type/gt_ko.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle;">(KO) 좋아하지도 않는 사람한테 자기 인생을 겁니까?</td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/type/ko.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                (T-KO) <span style="color: white; font-weight: bold; background-color: blue">joahajido anneun saramhante jagi insaengeul geopnikka?</span>
+                            </td>
+                            <td>
+                                <audio id="player" controls>
+                                    <source src="./audio/type/t-ko.wav"
+                                            type="audio/wav"/>
+                                </audio>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+
+</section>
+
+
+
+
+<!--<section class="page-section bg-primary text-white mb-0" id="intensity_">-->
+<!--    <div class="container">-->
+<!--        &lt;!&ndash; About Section Heading&ndash;&gt;-->
+<!--        <div class="text-center">-->
+<!--            <h2 class="page-section-heading d-inline-block text-white">Language style interpolation</h2>-->
+<!--            &lt;!&ndash;                                         <p class="pre-wrap lead">&nbsp;</p> &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Icon Divider&ndash;&gt;-->
+<!--        <div class="divider-custom divider-light">-->
+<!--            <div class="divider-custom"></div>-->
+<!--        </div>-->
+<!--        <div class="row justify-content-center">-->
+
+<!--            &lt;!&ndash; About Section Content&ndash;&gt;-->
+<!--            <div class="row">-->
+<!--                <div class="col-lg-12 ml-auto">-->
+
+<!--                    <table class="table table-responsive align-content-center"-->
+<!--                           style="background-color: whitesmoke; border-radius: 20px">-->
+<!--                        <tr>-->
+<!--                            <td style="vertical-align: middle;">-->
+<!--                                Script: 냉각수나 배터리는 미리 점검하세요.-->
+<!--                                <br>-->
+<!--                                <span style="color: slategray; opacity: 0.5">naenggaksuna "battery"-neun miri jeomgeomhaseyo.</span>-->
+<!--                            </td>-->
+
+<!--                        </tr>-->
+
+<!--                    </table>-->
+<!--                    <table class="table table-responsive align-content-center"-->
+<!--                           style="background-color: whitesmoke; border-radius: 20px">-->
+
+<!--                        <tr>-->
+<!--                            <td style="vertical-align: middle; text-align:center;">-->
+<!--                                <img src="./assets/img/intensity/00.png" width="400">-->
+<!--                            </td>-->
+<!--                            <td style="text-align:center;">-->
+<!--                                <audio id="player" controls>-->
+<!--                                    <source src="./audio/intensity/00.wav"-->
+<!--                                            type="audio/wav"/>-->
+<!--                                </audio>-->
+<!--                                <br>-->
+<!--                                $$e_{LSE}^{zero}$$-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td style="vertical-align: middle; text-align:center;">-->
+<!--                                <img src="./assets/img/intensity/02.png" width="400">-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <audio id="player" controls>-->
+<!--                                    <source src="./audio/intensity/02.wav"-->
+<!--                                            type="audio/wav"/>-->
+<!--                                </audio>-->
+<!--                                <br>-->
+<!--                                $$e_{LSE}^{kor2eng} * 0.2$$-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td style="vertical-align: middle; text-align:center;">-->
+<!--                                <img src="./assets/img/intensity/04.png"  width="400">-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <audio id="player" controls>-->
+<!--                                    <source src="./audio/intensity/04.wav"-->
+<!--                                            type="audio/wav"/>-->
+<!--                                </audio>-->
+<!--                                <br>-->
+<!--                                $$e_{LSE}^{kor2eng} * 0.4$$-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td style="vertical-align: middle; text-align:center;">-->
+<!--                                <img src="./assets/img/intensity/06.png"  width="400">-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <audio id="player" controls>-->
+<!--                                    <source src="./audio/intensity/06.wav"-->
+<!--                                            type="audio/wav"/>-->
+<!--                                </audio>-->
+<!--                                <br>-->
+<!--                                $$e_{LSE}^{kor2eng} * 0.6$$-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td style="vertical-align: middle; text-align:center;">-->
+<!--                                <img src="./assets/img/intensity/08.png"  width="400">-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <audio id="player" controls>-->
+<!--                                    <source src="./audio/intensity/08.wav"-->
+<!--                                            type="audio/wav"/>-->
+<!--                                </audio>-->
+<!--                                <br>-->
+<!--                                $$e_{LSE}^{kor2eng} * 0.8$$-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td style="vertical-align: middle; text-align:center;">-->
+<!--                                <img src="./assets/img/intensity/10.png"  width="400">-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <audio id="player" controls>-->
+<!--                                    <source src="./audio/intensity/10.wav"-->
+<!--                                            type="audio/wav"/>-->
+<!--                                </audio>-->
+<!--                                <br>-->
+<!--                                $$e_{LSE}^{kor2eng} * 1.0$$-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                    </table>-->
+
+
+
+<!--                    <p></p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+<!--</section>-->
+
+
+<section class="page-section bg-primary text-white mb-0" id="interpolation">
+    <div class="container-fluid">
+        <!-- About Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading d-inline-block text-white">Language style interpolation</h2>
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom"></div>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <!-- About Section Content-->
+            <div class="row">
+                <div class="col-lg-12 ml-auto">
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                <span style="font-weight: bold; color: red">If the interpolation scroll bar does not work,<br> it means that the audio is loading, so please try again later.</span>
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                Script: 냉각수나 배터리는 미리 점검하세요.
+                                <br>
+                                <span style="color: slategray; opacity: 0.5">naenggaksuna "battery"-neun miri jeomgeomhaseyo.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row text-center">
+                                    <div class="col-lg-12 ml-auto">
+                                    </div>
+
+                                    <div class="col-lg-12 ml-auto" style="background: lightslategray">
+                                        <br>
+                                        <h5>Interpolation</h5>
+
+                                        <span id="lse-val10" style="font-size: 25px;">\(e_{LSE}^{zero}\)</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input id="intensity0" type="input" data-slider-min="0" data-slider-max="1"
+                                               data-slider-step="0.2" data-slider-value="0"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span id="lse-val20" style="font-size: 23px;">\(e_{LSE}^{kor2eng}\)</span>
+                                        <br>
+                                        <br>
+                                    </div>
+
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="text-center col-lg-12">
+                                        <br/>
+                                        <img id="img_src0" src="./assets/img/intensity/00.png" width="500">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="text-center col-lg-12">
+                                        <br/>
+                                        <audio id="audio_panel0" controls="controls">
+                                            <source id="audio_src0" src="./audio/intensity/00.wav" type="audio/wav"/>
+                                        </audio>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                Script: The next song is pi ttam nunmul by bangtan sonyeondan.
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row text-center">
+                                    <div class="col-lg-12 ml-auto">
+                                    </div>
+
+                                    <div class="col-lg-12 ml-auto" style="background: lightslategray">
+                                        <br>
+                                        <h5>Interpolation</h5>
+
+                                        <span id="lse-val11" style="font-size: 25px;">\(e_{LSE}^{zero}\)</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input id="intensity1" type="input" data-slider-min="0" data-slider-max="1"
+                                               data-slider-step="0.2" data-slider-value="0"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span id="lse-val21" style="font-size: 23px;">\(e_{LSE}^{eng2kor}\)</span>
+                                        <br>
+                                        <br>
+                                    </div>
+
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="text-center col-lg-12">
+                                        <br/>
+                                        <img id="img_src1" src="./assets/img/intensity/1/00.png" width="500">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="text-center col-lg-12">
+                                        <br/>
+                                        <audio id="audio_panel1" controls="controls">
+                                            <source id="audio_src1" src="./audio/intensity/1/00.wav" type="audio/wav"/>
+                                        </audio>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                Script: 룩 포워드 투 씨잉 웨어 유 고 넥쓰트.
+                                <br>
+                                <span style="color: slategray; opacity: 0.5">Look forward to seeing where you go next.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row text-center">
+                                    <div class="col-lg-12 ml-auto">
+                                    </div>
+
+                                    <div class="col-lg-12 ml-auto" style="background: lightslategray">
+                                        <br>
+                                        <h5>Interpolation</h5>
+
+                                        <span id="lse-val12" style="font-size: 25px;">\(e_{LSE}^{zero}\)</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input id="intensity2" type="input" data-slider-min="0" data-slider-max="1"
+                                               data-slider-step="0.2" data-slider-value="1"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span id="lse-val22" style="font-size: 23px;">\(e_{LSE}^{kor2eng}\)</span>
+                                        <br>
+                                        <br>
+                                    </div>
+
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="text-center col-lg-12">
+                                        <br/>
+                                        <img id="img_src2" src="./assets/img/intensity/2/10.png" width="500">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="text-center col-lg-12">
+                                        <br/>
+                                        <audio id="audio_panel2" controls="controls">
+                                            <source id="audio_src2" src="./audio/intensity/2/10.wav" type="audio/wav"/>
+                                        </audio>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                Script: Annyeonghaseyo je ireumeun honggildong ipnida.
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row text-center">
+                                    <div class="col-lg-12 ml-auto">
+                                    </div>
+
+                                    <div class="col-lg-12 ml-auto" style="background: lightslategray">
+                                        <br>
+                                        <h5>Interpolation</h5>
+
+                                        <span id="lse-val13" style="font-size: 25px;">\(e_{LSE}^{zero}\)</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input id="intensity3" type="input" data-slider-min="0" data-slider-max="1"
+                                               data-slider-step="0.2" data-slider-value="1"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span id="lse-val23" style="font-size: 23px;">\(e_{LSE}^{eng2kor}\)</span>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="text-center col-lg-12">
+                                        <br/>
+                                        <img id="img_src3" src="./assets/img/intensity/3/10.png" width="500">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="text-center col-lg-12">
+                                        <br/>
+                                        <audio id="audio_panel3" controls="controls">
+                                            <source id="audio_src3" src="./audio/intensity/3/10.wav" type="audio/wav"/>
+                                        </audio>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="page-section bg-info text-white mb-0" id="additional_audio">
+    <div class="container">
+        <!-- About Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading d-inline-block text-white">Additional audio</h2>
+            <!--                                         <p class="pre-wrap lead">&nbsp;</p> -->
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom"></div>
+        </div>
+        <div class="row justify-content-center">
+
+            <!-- About Section Content-->
+            <div class="row">
+                <div class="col-lg-12 ml-auto">
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                <span style="font-weight: bold;">5 types of input</span>
+                                </br>
+                                EN:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; English
+                                </br>
+                                T-EN:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A transliterated text from English to Korean
+                                </br>
+                                KO:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Korean
+                                </br>
+                                T-KO:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A transliterated text from Korean to English
+                                </br>
+                                CM:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code-mixed
+                            </td>
+
+                        </tr>
+
+                    </table>
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+
+                        <tr>
+                            <td style="vertical-align: middle; text-align:center;" colspan="4">
+                                (EN) In fact, these are often quite dangerous to obtain, and use.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top;"><p>FACTSpeech</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/en_0_12.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>w/o CIN</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/en_1_12.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>Y. Zhang et al.</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/en_2_12.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>SANE-TTS</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/en_3_12.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+
+                        <tr>
+                            <td style="vertical-align: middle; text-align:center;" colspan="4">
+                                (T-EN) <span style="color: white; font-weight: bold; background-color: red">인 팩트, 디즈 아 옵튼 콰잇 덴저러쓰 투 옵테인, 엔드 유즈.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top;"><p>FACTSpeech</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/ten_0_12.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>w/o CIN</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/ten_1_12.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>Y. Zhang et al.</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/ten_2_12.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>SANE-TTS</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/ten_3_12.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+
+                        <tr>
+                            <td style="vertical-align: middle; text-align:center;" colspan="4">
+                                (KO) 주문하시겠습니까?
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top;"><p>FACTSpeech</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/ko_0_5.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>w/o CIN</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/ko_1_5.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>Y. Zhang et al.</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/ko_2_5.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>SANE-TTS</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/ko_3_5.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+
+                        <tr>
+                            <td style="vertical-align: middle; text-align:center;" colspan="4">
+                                (T-KO) <span style="color: white; font-weight: bold; background-color: blue">jumunhasigetseupnikka?</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top;"><p>FACTSpeech</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/tko_0_5.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>w/o CIN</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/tko_1_5.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>Y. Zhang et al.</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/tko_2_5.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>SANE-TTS</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/tko_3_5.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                    <table class="table table-responsive align-content-center"
+                           style="background-color: whitesmoke; border-radius: 20px">
+
+                        <tr>
+                            <td style="vertical-align: middle; text-align:center;" colspan="4">
+                                (CM) 이 연구의 key contribution은 무엇인가요?
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top;"><p>FACTSpeech</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/cm_0_076.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>w/o CIN</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/cm_1_076.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>Y. Zhang et al.</p>
+                                <div class="text-center">
+                                    <audio id="player" controls>
+                                        <source src="./audio/ablation/cm_2_076.wav" type="audio/wav" />
+                                    </audio>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;"><p>SANE-TTS</p>
+                                <div class="text-center">
+                                    <div class="text-center">
+                                        <audio id="player" controls>
+                                            <source src="./audio/ablation/cm_3_076.wav" type="audio/wav" />
+                                        </audio>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+
+</section>
+
+<div class="scroll-to-top d-lg-none position-fixed"><a class="js-scroll-trigger d-block text-center text-white rounded"
+                                                       href="#page-top"><i class="fa fa-chevron-up"></i></a></div>
+<!-- Bootstrap core JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+<script src="js/scripts.js"></script>
+<!-- Bootstrap slider JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"
+        integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA=="
+        crossorigin="anonymous"></script>
+<!-- slider JS -->
+<script type="text/javascript"></script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- slider JS -->
+<script type="text/javascript">
+    function zeroPad(nr, base) {
+        var len = (String(base).length - String(nr).length) + 1;
+        return len > 0 ? new Array(len).join('0') + nr : nr;
+    }
+
+    function audio_reload(id) {
+        intensity = zeroPad(Number($("#intensity"+id).val()) * 10, 10);
+
+        var img_name = "./assets/img/intensity/" + id + '/' + intensity + ".png";
+        var audio_name = "./audio/intensity/" + id + '/' + intensity + ".wav";
+
+        console.log(intensity)
+        // console.log(audio_name)
+
+        $('#img_src'+id).attr("src", img_name);
+        $('#audio_src'+id).attr("src", audio_name);
+
+        //console.log($('#audio_src').val());
+        //console.log($("#audio_panel"))
+        $('#audio_panel'+id)[0].load();
+
+    };
+    $(function () {
+
+        $('#intensity0').slider({
+            formatter: function (value) {
+                return value;
+            }
+        });
+
+//slider:ready slider:changed
+        // 슬라이더에서 선택한 값을 출력하는 부분
+        $('#intensity0').on("slide changed", function () {
+            audio_reload("0")
+        });
+        $('#intensity0').on("slide down", function () {
+            audio_reload("0")
+        });
+
+    });
+
+    $(function () {
+
+        $('#intensity1').slider({
+            formatter: function (value) {
+                return value;
+            }
+        });
+        $('#intensity1').on("slide changed", function () {
+            audio_reload("1")
+        });
+        $('#intensity1').on("slide down", function () {
+            audio_reload("1")
+        });
+
+    });
+
+
+    $(function () {
+
+        $('#intensity2').slider({
+            formatter: function (value) {
+                return value;
+            }
+        });
+        $('#intensity2').on("slide changed", function () {
+            audio_reload("2")
+        });
+        $('#intensity2').on("slide down", function () {
+            audio_reload("2")
+        });
+
+    });
+
+    $(function () {
+
+        $('#intensity3').slider({
+            formatter: function (value) {
+                return value;
+            }
+        });
+        $('#intensity3').on("slide changed", function () {
+            audio_reload("3")
+        });
+        $('#intensity3').on("slide down", function () {
+            audio_reload("3")
+        });
+
+    });
+</script>
+</body>
+</html>
